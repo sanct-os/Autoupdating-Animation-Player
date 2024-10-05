@@ -1,6 +1,6 @@
 //////////////////////
 // == External Animation Changer ==
-// developed by adam and is open source, if you tend to copy, please give me credits (@memscan on discord)
+// developed by adam and is open source, if you tend to copy, please give me credits (@vexvein. on discord WITH THE PERIOD)
 // you can also make your own cheat engine out of this
 //////////////////////
 
