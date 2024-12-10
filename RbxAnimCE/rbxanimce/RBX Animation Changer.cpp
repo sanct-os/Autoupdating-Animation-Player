@@ -1,8 +1,12 @@
-//////////////////////
-// == External Animation Changer ==
-// developed by adam and is open source, if you tend to copy, please give me credits (@vexvein. on discord WITH THE PERIOD)
-// you can also make your own cheat engine out of this
-//////////////////////
+///////////////////////////////
+// External Animation Player //
+///////////////////////////////
+// credits: adam/@malformedpackets
+// use in roblox r6 games only!
+// and no I'm not adding anything new to it
+
+// ignore my shit coding style
+// don't steal credit skids..
 
 #include <windows.h>
 #include <vector>
@@ -120,13 +124,12 @@ auto handle_anim(HANDLE proc, int anim_id) -> void {
 }
 
 auto main() -> int {
-    set_c_title("Roblox Anim Changer made by @memscan | (this is basically a cheat engine scanner remake)");
+    set_c_title("Roblox Animation Player C++ Version made by adam/@malformedpackets");
     HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    std::cout << "============ Animation Changer ============\n" << std::endl;
-    std::cout << "** developed by @memscan (adam) on discord and @1O59 (with an o, not 0) on roblox **\n" << std::endl;
+    std::cout << "============ Animation Player ============\n" << std::endl;
+    std::cout << "** developed by @malformedpackets (adam) on discord**\n" std::endl;
     std::cout << "-- you can find a list of roblox anim ids in the anims.txt file (r6)\n" << std::endl;
-    std::cout << "-- keep in mind you can literally remake cheat engine out of this source if you know how it works, so if you do give me credit on how i did it please\n" << std::endl;
     HWND console_win = GetConsoleWindow();
     if (console_win != nullptr) {
         SetWindowPos(console_win, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
@@ -158,7 +161,7 @@ auto main() -> int {
 
         try {
             int id = std::stoi(input);
-            std::cout << "[!] PLEASE give this up to 1 minute to 5 minutes to fully work. once its done it will tell you\n(this exploit is not primarily used for animation changing, its used to teach people how to make thier own cheat engine based on this source)\n";
+            std::cout << "[!] just a warning, this shit takes a long time to load (like 1-3 minutes), its pretty shit but you can use this if your exploit is patched or smth\n";
             handle_anim(open_proc, id);
         }
         catch (const std::invalid_argument&) {
