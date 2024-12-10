@@ -1,0 +1,1 @@
+The executable in the release is NOT UPDATED to the current script. Really only thing that changed was me updating my credits and changing a few things in the output. If you want updated version, download updatedversion.cpp.
