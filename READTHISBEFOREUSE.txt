@@ -1,1 +1,10 @@
-The executable in the release is NOT UPDATED to the current script. Really only thing that changed was me updating my credits and changing a few things in the output. If you want updated version, download updatedversion.cpp.
+-- Animation Player Warning --
+
+There is no executable release for this project, and it probably won't work if you download it as a zip and use it in visual studio, that is because I messed with some of the core files that make it run properly and I haven't tested to see if it works
+
+If you wan't to make it work, copy and paste the AnimPlayer.cpp into your own visual studio c++ project and make sure everything has the right settings for the project.
+
+This project was mainly just made for educational purposes and should not be used as an everyday cheat, it literally is very slow to make it change your animation in game.
+
+-- created by adam (sanct.os) --
+-- credit me if you used some of my code for your own project please --

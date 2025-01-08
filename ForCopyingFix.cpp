@@ -1,12 +1,18 @@
-///////////////////////////////
-// External Animation Player //
-///////////////////////////////
-// credits: adam/@malformedpackets
-// use in roblox r6 games only!
-// and no I'm not adding anything new to it
+// This file is incase you can't find AnimPlayer.cpp in the project and the project doesn't run/work for you
+// Incase it doesn't work, you need to make your own visual studio c++ file and paste this files source code into your own c++ file
+// Make sure visual studios settings will work with this
 
-// ignore my shit coding style
-// don't steal credit skids..
+
+// Terrible C++ External RBX Animation Player //
+
+// made by: adam/sanct.os //
+
+// use in r6 games only! //
+// it's possible to make the code work in r15 if you're smart enough //
+// this project is old and only recently revamped //
+
+// if you're gonna use some of my code for your own project, credit me please (adam | sanct.os on discord).
+
 
 #include <windows.h>
 #include <vector>
@@ -80,14 +86,14 @@ auto load_anim(HANDLE proc, const std::vector<LPVOID>& addys, const std::string&
                 
             }
             else {
-                std::cerr << "[e] unable to write mem to the original animation at -> " << addy << std::endl;
+                std::cerr << "[ ! error ! ] unable to write memory to the original animation address at -> " << addy << std::endl;
             }
             if (!VirtualProtectEx(proc, addy, new_id.size(), older_protect, &older_protect)) {
-                std::cerr << "[e] unable to restore mem protect at -> " << addy << std::endl;
+                std::cerr << "[ ! error ! ] cant restore memory protection at this address -> " << addy << std::endl;
             }
         }
         else {
-            std::cerr << "[e] cannot change mem protect at -> " << addy << std::endl;
+            std::cerr << "[ ! error ! ] cannot change memory protection at -> " << addy << std::endl;
         }
     }
 }
@@ -99,8 +105,9 @@ void set_c_title(const std::string& title) {
 
 auto handle_anim(HANDLE proc, int anim_id) -> void {
     std::vector<LPVOID> anim_addys;
-    // roblox built in default animations that will get changed based on your input
+    // roblox built in default R6 animations that will get changed based on your input to play the new animation
     std::vector<std::string> targets = {
+        // im sorry i forgot to write which animation is which on your character but i dont feel like finding it again now either
         "http://www.roblox.com/asset/?id=180426354",
         "http://www.roblox.com/asset/?id=180435571",
         "http://www.roblox.com/asset/?id=180435792",
@@ -111,7 +118,7 @@ auto handle_anim(HANDLE proc, int anim_id) -> void {
     steal_localplayer_anim_script_ids(proc, anim_addys, targets);
 
     if (anim_addys.empty()) {
-        std::cerr << "[e] no animation addresses found or the code did something wrong" << std::endl;
+        std::cerr << "[ ! error ! ] no animation addresses found or the code did something wrong?" << std::endl;
         return;
     }
 
@@ -120,16 +127,16 @@ auto handle_anim(HANDLE proc, int anim_id) -> void {
     std::string replace_id = oss.str();
 
     load_anim(proc, anim_addys, replace_id);
-    std::cout << "[!] Done loading animation, walk around to activate it\n";
+    std::cout << "[ ! complete ! ] done loading animation, walk around to activate it\n";
 }
 
 auto main() -> int {
-    set_c_title("Roblox Animation Player C++ Version made by adam/@malformedpackets");
+    set_c_title("External Animation Player | by: @sanct.os (adam)");
     HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    std::cout << "============ Animation Player ============\n" << std::endl;
-    std::cout << "** developed by @malformedpackets (adam) on discord**\n" std::endl;
-    std::cout << "-- you can find a list of roblox anim ids in the anims.txt file (r6)\n" << std::endl;
+    std::cout << "============ Main ============\n" << std::endl;
+    std::cout << "** created by @sanct.os (adam)\n" std::endl;
+    std::cout << "-- you'll have to find a list of roblox made r6 animations to use it, you cannot use animations made by others, it wont work\n" << std::endl;
     HWND console_win = GetConsoleWindow();
     if (console_win != nullptr) {
         SetWindowPos(console_win, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
@@ -139,20 +146,20 @@ auto main() -> int {
     auto pid = proc_get(proc_rbx);
 
     if (pid == 0) {
-        std::cerr << "[e] roblox is not open. open it then run again (make sure your on web app and not uwp)" << std::endl;
+        std::cerr << "[ ! error ! ]  roblox is not open. open it then run the program again (make sure your on web app and not uwp)" << std::endl;
         return 1;
     }
 
     auto open_proc = OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION, FALSE, pid);
 
     if (open_proc == nullptr) {
-        std::cerr << "[e] failed to open process." << std::endl;
+        std::cerr << "[ ! error ! ]  failed to openprocess()." << std::endl;
         return 1;
     }
 
     while (true) {
-        std::cout << "[!] note: you can only use Roblox made animations. it cannot be an animation created by another user.\n";
-        std::cout << "[!] tip: you can set the animation id to the /e dance animation id if you want to /e dance while moving.\n\n";
+        std::cout << "[ ! TIP ! ] note: you can only use Roblox made animations. it cannot be an animation created by another user.\n";
+        std::cout << "[ ! TIP ! ] you can set the animation id to the /e dance animation id if you want to /e dance while moving or whatever.\n\n";
         std::cout << "----------------------------------------------------\n\n";
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
         std::cout << "[*] enter new animation ID: ";
@@ -161,11 +168,11 @@ auto main() -> int {
 
         try {
             int id = std::stoi(input);
-            std::cout << "[!] just a warning, this shit takes a long time to load (like 1-3 minutes), its pretty shit but you can use this if your exploit is patched or smth\n";
+            std::cout << "[ ! INFO ! ] just a little warning, this legit takes a long time to load depending on your pc (like 30 seconds to 3 minutes), its pretty shit but you can use this code to learn from or if your cheat is patched\n";
             handle_anim(open_proc, id);
         }
         catch (const std::invalid_argument&) {
-            std::cerr << "input needs to be numbers for the animation id (1234567890) \n";
+            std::cerr << "[ ! error ! ] input needs to be numbers for the animation id (example: 1234567890) \n";
         }
         CloseHandle(open_proc);
         return 0;
